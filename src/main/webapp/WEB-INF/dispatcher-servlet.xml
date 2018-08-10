@@ -1,0 +1,45 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <context:component-scan base-package="ru.BostonGene.gilaziev.answers.task2_rest"/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"
+                id="marshallingHttpMessageConverter">
+            <constructor-arg ref="jaxbMarshaller"/>
+                <property name="supportedMediaTypes"  value="application/xml"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+        <mvc:annotation-driven/>
+    <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>ru.BostonGene.gilaziev.answers.task2_rest.pojo.User</value>
+                <value>ru.BostonGene.gilaziev.answers.task2_rest.pojo.UserList</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="users" class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <constructor-arg ref="jaxbMarshaller" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <bean name="bcryptEncoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+</beans>
