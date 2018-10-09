@@ -17,6 +17,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
             <constructor-arg ref="jaxbMarshaller"/>
                 <property name="supportedMediaTypes"  value="application/xml"/>
             </bean>
+            <bean class="org.springframework.http.converter.json.GsonHttpMessageConverter"
+                  id="gsonHttpMessageConverter">
+            </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
         <mvc:annotation-driven/>

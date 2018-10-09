@@ -24,23 +24,19 @@ public class UserController {
     UserService userService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     Jaxb2Marshaller jaxb2Marshaller;
 
-    @RequestMapping(value = "/getUser/{email}", method = RequestMethod.GET,headers="content-type=application/xml, application/json")
+    @RequestMapping(value = "/getUser/{email}", method = RequestMethod.GET,
+                                                headers="content-type=application/xml, application/json")
     public @ResponseBody User getUserByEmail(@PathVariable String email){
-        User user1 = userService.findUserByEmail(email);
-        return  user1;
+        User users = userService.findUserByEmail(email);
+        return  users;
     }
 
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public @ResponseBody User addUser(@RequestBody String requestUser){
         Source source = new StreamSource(new StringReader(requestUser));
         User addUser = (User) jaxb2Marshaller.unmarshal(source);
-        String bcryptPass = bCryptPasswordEncoder.encode(addUser.getPassword());
-        addUser.setPassword(bcryptPass);
         userService.addUser(addUser);
         return  addUser;
     }
@@ -51,7 +47,8 @@ public class UserController {
         userService.deleteUserByEmail(email);
     }
 
-    @RequestMapping(value = "/getUserAll", method = RequestMethod.GET,headers="content-type=application/xml, application/json")
+    @RequestMapping(value = "/getUserAll", method = RequestMethod.GET,
+                                            headers="content-type=application/xml, application/json")
     @ResponseBody
     public UserList getUserAll(){
         List<User>listUser = userService.getAll();

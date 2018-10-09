@@ -46,35 +46,34 @@ public class EnglishTranslator {
     public String translateNumbers(){
         String translateNumberInString="";
         String str = "";
-
         if(numbers.containsKey(inputValue)){
             translateNumberInString = numbers.get(inputValue) ;
         }
-
         else {
             str = inputValue.toString();
-
             switch (str.length()){
                 case 2:
                     Integer xTeen2 = Integer.parseInt(String.valueOf(str.charAt(0))) * 10;
                     Integer lastIndex2 = Integer.parseInt(String.valueOf(str.charAt(1)));
                     translateNumberInString = numbers.get(xTeen2) + " " + numbers.get(lastIndex2);
                     break;
-
                 case 3:
                     Integer xHundred = Integer.parseInt(String.valueOf(str.charAt(0)));
                     Integer xTeen3 = Integer.parseInt(String.valueOf(str.charAt(1))) * 10;
                     Integer lastIndex3 = Integer.parseInt(String.valueOf(str.charAt(2)));
-                    translateNumberInString = numbers.get(xHundred) + " " + numbers.get(100) + " "+ numbers.get(xTeen3) + " " + numbers.get(lastIndex3);
+                    translateNumberInString = numbers.get(xHundred) + " "
+                                                + numbers.get(100) + " "
+                                                + numbers.get(xTeen3) + " "
+                                                + numbers.get(lastIndex3);
                     break;
-
                 case 4:
                     Integer xThousand = Integer.parseInt(String.valueOf(str.charAt(0)));
                     Integer xHundred4 = Integer.parseInt(String.valueOf(str.charAt(1)));
                     Integer xTeen4 = Integer.parseInt(String.valueOf(str.charAt(2))) * 10;
                     Integer lastIndex4 = Integer.parseInt(String.valueOf(str.charAt(3)));
                     translateNumberInString = numbers.get(xThousand)+ " " + numbers.get(1000)+ " "+
-                            numbers.get(xHundred4)+ " " + numbers.get(100)+ " "+ numbers.get(xTeen4) + " " + numbers.get(lastIndex4);
+                                                 numbers.get(xHundred4)+ " " + numbers.get(100)+ " "+
+                                                    numbers.get(xTeen4) + " " + numbers.get(lastIndex4);
                     break;
             }
         }

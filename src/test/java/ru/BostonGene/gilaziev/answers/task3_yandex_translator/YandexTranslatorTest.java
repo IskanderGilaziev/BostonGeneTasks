@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class YandexTranslatorTest {
 
     private HttpClient httpClient;
-    private  final  String yandexApiKey = "trnsl.1.1.20180807T190029Z.8164c743459e7355.6dd52c5c753eb8f1694ecf7e7c821f5c42692e5d";
+    private  final  String yandexApiKey = "yandex key"; // enter your yandex key
     private  YandexTranslator yandexTranslator;
     @Before
     public  void init(){

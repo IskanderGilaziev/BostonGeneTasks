@@ -3,6 +3,7 @@ package ru.BostonGene.gilaziev.answers.task2_rest.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.BostonGene.gilaziev.answers.task2_rest.dao.UserDAO;
 import ru.BostonGene.gilaziev.answers.task2_rest.pojo.User;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements  UserService {
     @Autowired
     UserDAO userDAO;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public UserServiceImpl() {
     }
 
@@ -22,9 +26,10 @@ public class UserServiceImpl implements  UserService {
 
     }
 
-
     @Override
     public void addUser(User user) {
+        String bcryptPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(bcryptPassword);
         userDAO.addUser(user);
     }
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class EnterThread extends  Thread {
 
     private EnglishTranslator translator;
-    private Memory myMemory;
+    private final Memory myMemory;
 
     public EnterThread(Memory memory) {
         this.myMemory = memory;
